@@ -1,5 +1,9 @@
 package main
 
+import (
+	"net/http"
+)
+
 type Blog struct {
 	title     string
 	subtitle  string
@@ -8,6 +12,6 @@ type Blog struct {
 	comments  []Comment
 }
 
-func saveBlog(blog Blog) {
+func saveBlog(w http.ResponseWriter, r *http.Request) {
 
 }
