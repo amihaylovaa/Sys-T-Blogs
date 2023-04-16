@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 )
 
@@ -11,5 +10,5 @@ type Comment struct {
 }
 
 func saveComment(w http.ResponseWriter, r *http.Request) {
-	log.Print("HELLO 1")
+
 }
