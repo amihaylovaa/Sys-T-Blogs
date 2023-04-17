@@ -5,6 +5,7 @@ import (
 )
 
 type Comment struct {
+	id             uint
 	content        string
 	attachmentsUrl []string
 }

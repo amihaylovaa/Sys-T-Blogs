@@ -5,6 +5,7 @@ import (
 )
 
 type Blog struct {
+	id        uint
 	title     string
 	subtitle  string
 	content   string
