@@ -1,0 +1,25 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Comment DTO",
+    "description": "A DTO for a comment",
+    "type": "object",
+    "properties": {
+      "blogId": {
+        "description": "The ID of the blog to which the comment belongs",
+        "type": "number",
+        "exclusiveMinimum": 0
+      },
+      "content": {
+        "description": "The content/body of the comment",
+        "type": "string"
+      },
+      "attachmentsUrl": {
+          "description": "Comment's URLs to attachments",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+      }
+    },
+    "required": [ "blogId", "content"]
+}

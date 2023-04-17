@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Blog DTO",
+  "description": "A DTO for a blog",
+  "type": "object",
+  "properties": {
+    "title": {
+      "description": "The title of the blog",
+      "type": "string"
+    },
+    "subtitle": {
+      "description": "The subtitle of the product",
+      "type": "string"
+    },
+    "content": {
+      "description": "The content/body of the blog",
+      "type": "string"
+    },
+    "attachmentsUrl": {
+        "description": "Blog's URLs to attachments",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+    }
+  },
+  "required": [ "title", "subtitle", "content"]
+}
