@@ -4,4 +4,4 @@ go 1.20
 
 require github.com/go-chi/chi v1.5.4
 
-require github.com/santhosh-tekuri/jsonschema v1.2.4 // indirect
+require github.com/santhosh-tekuri/jsonschema/v5 v5.3.0
