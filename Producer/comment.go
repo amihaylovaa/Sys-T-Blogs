@@ -1,10 +1,10 @@
 package main
 
 import (
-	"log"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"net/http"
-
-	"github.com/santhosh-tekuri/jsonschema"
 )
 
 type Comment struct {
@@ -14,9 +14,32 @@ type Comment struct {
 }
 
 func saveComment(w http.ResponseWriter, r *http.Request) {
-	sch, err := jsonschema.Compile("schema/comment_dto_schema.json")
-
+	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		log.Fatalf("%#v", err)
+		fmt.Println(err)
 	}
+
+	var commentDto CommentDto
+
+	if err = json.Unmarshal(body, &commentDto); err != nil {
+		fmt.Println(err)
+	}
+	// sch, err := jsonschema.Compile("schema/comment_dto_schema.json")
+	// if err != nil {
+	// 	log.Fatalf("%#v", err)
+	// }
+
+	// data, err := ioutil.ReadFile("schema/comment_dto_schema.json")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// var v interface{}
+	// if err := json.Unmarshal(data, &v); err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// if err = sch.Validate(v); err != nil {
+	// 	log.Fatalf("%#v", err)
+	// }
 }
