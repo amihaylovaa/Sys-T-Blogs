@@ -1,8 +1,8 @@
 package main
 
 type BlogDto struct {
-	title          string
-	subtitle       string
-	content        string
-	attachmentsUrl []string
+	Title          string   `json: "title"`
+	Subtitle       string   `json: "subtitle"`
+	Content        string   `json: "content"`
+	AttachmentsUrl []string `json: "attachmentsUrl"`
 }
