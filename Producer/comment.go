@@ -4,10 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 
-	"github.com/santhosh-tekuri/v5/jsonschema"
+	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
 type Comment struct {
@@ -30,20 +29,20 @@ func saveComment(w http.ResponseWriter, r *http.Request) {
 
 	sch, err := jsonschema.Compile("schema/comment_dto_schema.json")
 	if err != nil {
-		log.Fatalf("%#v", err)
+		fmt.Println(err)
 	}
 
 	data, err := ioutil.ReadFile("schema/comment_dto_schema.json")
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 
 	var v interface{}
 	if err := json.Unmarshal(data, &v); err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 
 	if err = sch.Validate(v); err != nil {
-		log.Fatalf("%#v", err)
+		fmt.Println(err)
 	}
 }
