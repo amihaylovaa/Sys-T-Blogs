@@ -32,17 +32,7 @@ func saveComment(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	data, err := ioutil.ReadFile("schema/comment_dto_schema.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	var v interface{}
-	if err := json.Unmarshal(data, &v); err != nil {
-		fmt.Println(err)
-	}
-
-	if err = sch.Validate(v); err != nil {
+	if err = sch.Validate(commentDto); err != nil {
 		fmt.Println(err)
 	}
 }
