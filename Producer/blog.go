@@ -24,7 +24,7 @@ func saveBlog(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	var blogDto BlogDto
+	var blogDto map[string]interface{}
 
 	if err = json.Unmarshal(body, &blogDto); err != nil {
 		fmt.Println(err)

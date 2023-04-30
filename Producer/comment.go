@@ -21,7 +21,7 @@ func saveComment(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	var commentDto CommentDto
+	var commentDto map[string]interface{}
 
 	if err = json.Unmarshal(body, &commentDto); err != nil {
 		fmt.Println(err)
