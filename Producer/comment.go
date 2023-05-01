@@ -17,7 +17,7 @@ type Comment struct {
 	attachmentsUrl []string
 }
 
-func saveComment(r *http.Request) (statusCode int, message string) {
+func saveComment(r *http.Request) (statusCode int, responseBody string) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(err)
