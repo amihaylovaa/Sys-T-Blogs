@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	sch "producer/schema"
+
 	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
@@ -30,7 +32,8 @@ func saveBlog(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	sch, err := jsonschema.Compile("schema/blog_dto_schema.json")
+	schemaName := sch.BLOG_DTO_SCHEMA
+	sch, err := jsonschema.Compile(schemaName)
 	if err != nil {
 		fmt.Println(err)
 	}
