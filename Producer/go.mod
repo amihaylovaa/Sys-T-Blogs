@@ -7,4 +7,4 @@ require (
 	github.com/santhosh-tekuri/jsonschema/v5 v5.3.0
 )
 
-require github.com/twmb/franz-go v1.13.3 // indirect
+require github.com/confluentinc/confluent-kafka-go v1.9.2
