@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 
-	_ "github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/go-chi/chi"
 )
 
