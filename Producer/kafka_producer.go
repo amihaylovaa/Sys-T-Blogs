@@ -4,9 +4,7 @@ import (
 	"github.com/Shopify/sarama"
 )
 
-var producer sarama.AsyncProducer
-
-func createNewProducer() {
+func createNewProducer() sarama.AsyncProducer {
 	config := sarama.NewConfig()
 
 	p, err := sarama.NewAsyncProducer([]string{"localhost:29092"}, config)
@@ -15,7 +13,7 @@ func createNewProducer() {
 		panic("Error")
 	}
 
-	producer = p
+	return p
 }
 
 func createMessage(topic, message string, partition int32) *sarama.ProducerMessage {

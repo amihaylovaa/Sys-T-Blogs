@@ -8,6 +8,7 @@ import (
 
 	sch "producer/schema"
 
+	"github.com/Shopify/sarama"
 	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
@@ -20,7 +21,7 @@ type Blog struct {
 	comments       []Comment
 }
 
-func saveBlog(r *http.Request) (statusCode int, responseBody string) {
+func saveBlog(r *http.Request, producer sarama.AsyncProducer) (statusCode int, responseBody string) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(err)
