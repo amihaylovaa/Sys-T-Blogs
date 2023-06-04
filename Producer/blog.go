@@ -12,15 +12,6 @@ import (
 	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
-type Blog struct {
-	id             uint
-	title          string
-	subtitle       string
-	content        string
-	attachmentsUrl []string
-	comments       []Comment
-}
-
 func saveBlog(r *http.Request, producer sarama.AsyncProducer) (statusCode int, responseBody string) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {

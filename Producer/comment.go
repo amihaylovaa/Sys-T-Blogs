@@ -12,12 +12,6 @@ import (
 	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
-type Comment struct {
-	id             uint
-	content        string
-	attachmentsUrl []string
-}
-
 func saveComment(r *http.Request, producer sarama.AsyncProducer) (statusCode int, responseBody string) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
