@@ -6,10 +6,10 @@ import (
 	"github.com/Shopify/sarama"
 )
 
-func createNewProducer() sarama.AsyncProducer {
+func createNewProducer() sarama.SyncProducer {
 	config := sarama.NewConfig()
 
-	p, err := sarama.NewAsyncProducer([]string{"localhost:29092"}, config)
+	p, err := sarama.NewSyncProducer([]string{"localhost:29092"}, config)
 
 	if err != nil {
 		fmt.Println(err)
@@ -18,12 +18,12 @@ func createNewProducer() sarama.AsyncProducer {
 	return p
 }
 
-func createMessage(topic, message string, partition int32, producer sarama.AsyncProducer) {
+func createMessage(topic, message string, partition int32, producer sarama.SyncProducer) {
 	msg := &sarama.ProducerMessage{
 		Topic:     topic,
 		Partition: partition,
 		Value:     sarama.StringEncoder(message),
 	}
 
-	producer.Input() <- msg
+	producer.SendMessage(msg)
 }

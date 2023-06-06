@@ -12,7 +12,7 @@ import (
 	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
-func saveComment(r *http.Request, producer sarama.AsyncProducer) (statusCode int, responseBody string) {
+func saveComment(r *http.Request, producer sarama.SyncProducer) (statusCode int, responseBody string) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(err)

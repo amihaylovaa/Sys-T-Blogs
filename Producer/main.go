@@ -19,7 +19,7 @@ func main() {
 	http.ListenAndServe(":5500", r)
 }
 
-func handleRequest(handle Handler, producer sarama.AsyncProducer) http.HandlerFunc {
+func handleRequest(handle Handler, producer sarama.SyncProducer) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		statusCode, responseBody := handle(r, producer)
 
@@ -33,4 +33,4 @@ func handleRequest(handle Handler, producer sarama.AsyncProducer) http.HandlerFu
 	}
 }
 
-type Handler func(r *http.Request, producer sarama.AsyncProducer) (statusCode int, responseBody string)
+type Handler func(r *http.Request, producer sarama.SyncProducer) (statusCode int, responseBody string)
