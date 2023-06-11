@@ -12,7 +12,6 @@ func main() {
 	producer, err := createNewProducer()
 
 	if err != nil {
-		fmt.Println("HEREEEEE")
 		fmt.Println(err)
 	}
 
