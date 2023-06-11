@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Shopify/sarama"
@@ -9,6 +10,11 @@ import (
 
 func main() {
 	producer := createNewProducer()
+
+	if producer == nil {
+		fmt.Println("Cannot create producer")
+	}
+
 	r := chi.NewRouter()
 
 	r.Route("/api/v1", func(r chi.Router) {

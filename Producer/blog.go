@@ -12,12 +12,12 @@ import (
 	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
-func saveBlog(r *http.Request, producer sarama.AsyncProducer) (statusCode int, responseBody string) {
+func saveBlog(r *http.Request, producer sarama.SyncProducer) (statusCode int, responseBody string) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(err)
 
-		return http.StatusInternalServerError, "Cannot read request body"
+		return http.StatusBadRequest, "Cannot read request body"
 	}
 
 	var blogDto map[string]interface{}
@@ -25,7 +25,7 @@ func saveBlog(r *http.Request, producer sarama.AsyncProducer) (statusCode int, r
 	if err = json.Unmarshal(body, &blogDto); err != nil {
 		fmt.Println(err)
 
-		return http.StatusInternalServerError, "Cannot unmarshal request body"
+		return http.StatusBadRequest, "Cannot unmarshal request body"
 	}
 
 	schemaName := sch.BLOG_DTO_SCHEMA
@@ -41,6 +41,14 @@ func saveBlog(r *http.Request, producer sarama.AsyncProducer) (statusCode int, r
 
 		return http.StatusBadRequest, "Schema Validation failed"
 	}
+
+	bodyMarshaled, err := json.Marshal(blogDto)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	sendMessage("quickstart-events", string(bodyMarshaled[:]), 0, producer)
 
 	return http.StatusOK, ""
 }

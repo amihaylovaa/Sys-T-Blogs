@@ -17,7 +17,7 @@ func saveComment(r *http.Request, producer sarama.SyncProducer) (statusCode int,
 	if err != nil {
 		fmt.Println(err)
 
-		return http.StatusInternalServerError, "Cannot read request body"
+		return http.StatusBadRequest, "Cannot read request body"
 	}
 
 	var commentDto map[string]interface{}
@@ -25,7 +25,7 @@ func saveComment(r *http.Request, producer sarama.SyncProducer) (statusCode int,
 	if err = json.Unmarshal(body, &commentDto); err != nil {
 		fmt.Println(err)
 
-		return http.StatusInternalServerError, "Cannot unmarshal request body"
+		return http.StatusBadRequest, "Cannot unmarshal request body"
 	}
 
 	schemaName := sch.COMMENT_DTO_SCHEMA
