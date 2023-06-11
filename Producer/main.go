@@ -9,10 +9,11 @@ import (
 )
 
 func main() {
-	producer := createNewProducer()
+	producer, err := createNewProducer()
 
-	if producer == nil {
-		fmt.Println("Cannot create producer")
+	if err != nil {
+		fmt.Println("HEREEEEE")
+		fmt.Println(err)
 	}
 
 	r := chi.NewRouter()
