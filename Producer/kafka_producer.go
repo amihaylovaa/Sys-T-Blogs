@@ -11,7 +11,7 @@ func createNewProducer() (sarama.SyncProducer, error) {
 	config.Producer.Partitioner = sarama.NewRandomPartitioner
 	config.Producer.Return.Successes = true
 
-	p, err := sarama.NewSyncProducer([]string{"localhost:29092"}, config)
+	p, err := sarama.NewSyncProducer([]string{"producer-kafka-1:29092"}, config)
 
 	if err != nil {
 		fmt.Println(err)
