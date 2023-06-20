@@ -1,7 +1,14 @@
 version: '2'
+
+networks:
+  prod_network:
+    name: prod_network_in
+
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    networks:
+      - prod_network_in
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -9,6 +16,8 @@ services:
       - "2181:2181"
   kafka:
     image: confluentinc/cp-kafka:latest
+    networks:
+      - prod_network_in
     depends_on:
       - zookeeper
     ports:
