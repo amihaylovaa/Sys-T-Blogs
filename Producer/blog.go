@@ -42,7 +42,7 @@ func saveBlog(r *http.Request, producer sarama.SyncProducer) (statusCode int, re
 		return http.StatusBadRequest, "Schema Validation failed"
 	}
 
-	sendMessage("quickstart-events", body, 0, producer)
+	sendMessage("blogs", string(body[:]), 0, producer)
 
 	return http.StatusOK, ""
 }

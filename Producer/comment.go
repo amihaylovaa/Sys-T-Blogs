@@ -42,7 +42,7 @@ func saveComment(r *http.Request, producer sarama.SyncProducer) (statusCode int,
 		return http.StatusBadRequest, "Schema Validation failed"
 	}
 
-	sendMessage("quickstart-events", body, 0, producer)
+	sendMessage("comments", string(body[:]), 0, producer)
 
 	return http.StatusOK, ""
 }
