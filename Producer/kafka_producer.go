@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/Shopify/sarama"
 )
@@ -11,10 +11,10 @@ func createNewProducer() (sarama.SyncProducer, error) {
 	config.Producer.Partitioner = sarama.NewRandomPartitioner
 	config.Producer.Return.Successes = true
 
-	p, err := sarama.NewSyncProducer([]string{"producer-kafka-1:29092"}, config)
+	p, err := sarama.NewSyncProducer([]string{"kafka:29092"}, config)
 
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return nil, err
 	}
@@ -32,6 +32,6 @@ func sendMessage(topic, message string, partition int32, producer sarama.SyncPro
 	_, _, err := producer.SendMessage(msg)
 
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 }

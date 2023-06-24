@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	sch "producer/schema"
@@ -15,7 +15,7 @@ import (
 func saveBlog(r *http.Request, producer sarama.SyncProducer) (statusCode int, responseBody string) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return http.StatusBadRequest, "Cannot read request body"
 	}
@@ -23,7 +23,7 @@ func saveBlog(r *http.Request, producer sarama.SyncProducer) (statusCode int, re
 	var blogDto map[string]interface{}
 
 	if err = json.Unmarshal(body, &blogDto); err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return http.StatusBadRequest, "Cannot unmarshal request body"
 	}
@@ -31,24 +31,18 @@ func saveBlog(r *http.Request, producer sarama.SyncProducer) (statusCode int, re
 	schemaName := sch.BLOG_DTO_SCHEMA
 	sch, err := jsonschema.Compile(schemaName)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return http.StatusInternalServerError, "Cannot load schema"
 	}
 
 	if err = sch.Validate(blogDto); err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return http.StatusBadRequest, "Schema Validation failed"
 	}
 
-	bodyMarshaled, err := json.Marshal(blogDto)
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	sendMessage("quickstart-events", string(bodyMarshaled[:]), 0, producer)
+	sendMessage("quickstart-events", body, 0, producer)
 
 	return http.StatusOK, ""
 }

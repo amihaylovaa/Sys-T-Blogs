@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/Shopify/sarama"
@@ -12,7 +12,7 @@ func main() {
 	producer, err := createNewProducer()
 
 	if err != nil {
-		fmt.Println(err)
+		log.Fatalln(err)
 	}
 
 	r := chi.NewRouter()
