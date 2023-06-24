@@ -33,7 +33,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
 
   s_client:
-    image: producer_server_client:0.0.1
+    image: producer_server_client:0.0.2
     container_name: producer_server_client
     networks:
       - producer_network
