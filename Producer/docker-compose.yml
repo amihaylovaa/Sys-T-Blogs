@@ -1,14 +1,16 @@
-version: '2'
+version: '3.5'
 
 networks:
-  prod_network:
-    name: prod_network_in
+  producer_web_mobile_network :
+      name: producer_web_mobile_network
+      external: true
 
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
     networks:
-      - prod_network_in
+      - producer_web_mobile_network
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -16,8 +18,9 @@ services:
       - "2181:2181"
   kafka:
     image: confluentinc/cp-kafka:latest
+    container_name: kafka
     networks:
-      - prod_network_in
+      - producer_web_mobile_network 
     depends_on:
       - zookeeper
     ports:
@@ -28,3 +31,14 @@ services:
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://producer-kafka-1:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+
+  web_client:
+    image: producer_web_client
+    container_name: web_client
+    networks:
+      - producer_web_mobile_network
+    depends_on:
+      - zookeeper
+      - kafka
+    ports:
+      - "5500:5500"
