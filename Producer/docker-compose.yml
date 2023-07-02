@@ -29,12 +29,14 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
 
   producer_server_client:
-    image: producer_server_client:0.0.3
+    image: producer_server_client:0.0.6
     container_name: producer_server_client
     networks:
       - producer_network
     depends_on:
-      - zookeeper
-      - kafka
+      zookeeper:
+          condition: service_started
+      kafka:
+          condition: service_started
     ports:
       - "5500:5500"
