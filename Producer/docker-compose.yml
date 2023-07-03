@@ -34,9 +34,7 @@ services:
     networks:
       - producer_network
     depends_on:
-      zookeeper:
-          condition: service_started
-      kafka:
-          condition: service_started
+      - zookeeper
+      - kafka
     ports:
       - "5500:5500"

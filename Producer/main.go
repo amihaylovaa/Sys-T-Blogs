@@ -3,12 +3,15 @@ package main
 import (
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/Shopify/sarama"
 	"github.com/go-chi/chi"
 )
 
 func main() {
+	time.Sleep(30 * time.Second)
+
 	producer, err := createNewProducer()
 
 	if err != nil {
