@@ -10,9 +10,8 @@ import (
 )
 
 func main() {
-	time.Sleep(30 * time.Second)
-
-	producer, err := createNewProducer()
+	// TODO - use goroutines
+	producer, err := createKafkaProducer(5, 30*time.Second, createNewProducer)
 
 	if err != nil {
 		log.Fatalln(err)

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"github.com/Shopify/sarama"
 )
 
@@ -26,4 +28,18 @@ func sendMessage(topic, message string, reqPartition int32, producer sarama.Sync
 	}
 
 	return producer.SendMessage(msg)
+}
+
+func createKafkaProducer(attempts int, sleep time.Duration, createNewProducer func() (sarama.SyncProducer, error)) (sarama.SyncProducer, error) {
+	for i := 0; i < attempts; i++ {
+
+		producer, err = createNewProducer()
+		if err != nil {
+			time.Sleep(sleep)
+
+			continue
+		}
+		return producer, err
+	}
+	return nil, nil
 }
