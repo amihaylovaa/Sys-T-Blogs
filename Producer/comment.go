@@ -42,7 +42,11 @@ func saveComment(r *http.Request, producer sarama.SyncProducer) (statusCode int,
 		return http.StatusBadRequest, "Schema Validation failed"
 	}
 
-	sendMessage("comments", string(body[:]), 0, producer)
+	_, _, err = sendMessage("comments", string(body[:]), 0, producer)
+
+	if err != nil {
+		return http.StatusInternalServerError, "Cannot save the given comment, please try again later!"
+	}
 
 	return http.StatusOK, ""
 }

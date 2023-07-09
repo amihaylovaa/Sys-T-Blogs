@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	"github.com/Shopify/sarama"
 )
 
@@ -14,24 +12,18 @@ func createNewProducer() (sarama.SyncProducer, error) {
 	p, err := sarama.NewSyncProducer([]string{"kafka:9092"}, config)
 
 	if err != nil {
-		log.Println(err)
-
 		return nil, err
 	}
 
 	return p, nil
 }
 
-func sendMessage(topic, message string, partition int32, producer sarama.SyncProducer) {
+func sendMessage(topic, message string, reqPartition int32, producer sarama.SyncProducer) (partition int32, offset int64, err error) {
 	msg := &sarama.ProducerMessage{
 		Topic:     topic,
-		Partition: partition,
+		Partition: reqPartition,
 		Value:     sarama.StringEncoder(message),
 	}
 
-	_, _, err := producer.SendMessage(msg)
-
-	if err != nil {
-		log.Println(err)
-	}
+	return producer.SendMessage(msg)
 }
