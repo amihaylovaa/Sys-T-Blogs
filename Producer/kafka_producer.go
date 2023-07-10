@@ -30,7 +30,7 @@ func sendMessage(topic, message string, reqPartition int32, producer sarama.Sync
 	return producer.SendMessage(msg)
 }
 
-func createKafkaProducer(attempts int, sleep time.Duration, createNewProducer func() (sarama.SyncProducer, error)) (sarama.SyncProducer, error) {
+func createKafkaProducer(attempts int, sleep time.Duration, producerChannel chan sarama.SyncProducer, errorChannel chan error, createNewProducer func() (sarama.SyncProducer, error)) {
 	for i := 0; i < attempts; i++ {
 
 		producer, err = createNewProducer()
@@ -39,7 +39,5 @@ func createKafkaProducer(attempts int, sleep time.Duration, createNewProducer fu
 
 			continue
 		}
-		return producer, err
 	}
-	return nil, nil
 }

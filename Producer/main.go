@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"time"
 
@@ -11,11 +10,14 @@ import (
 
 func main() {
 	// TODO - use goroutines
-	producer, err := createKafkaProducer(5, 30*time.Second, createNewProducer)
+	producerChannel := make(chan sarama.SyncProducer)
+	errorChannel := make(chan error)
 
-	if err != nil {
-		log.Fatalln(err)
-	}
+	createKafkaProducer(5, 30*time.Second, producerChannel, errorChannel, createNewProducer)
+
+	// if err != nil {
+	// 	log.Fatalln(err)
+	// }
 
 	r := chi.NewRouter()
 
