@@ -39,5 +39,11 @@ func createKafkaProducer(attempts int, sleep time.Duration, producerChannel chan
 
 			continue
 		}
+		errorChannel <- nil
+		producerChannel <- producer
+
+		return
 	}
+	errorChannel <- nil
+	producerChannel <- nil
 }
