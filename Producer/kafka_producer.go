@@ -34,22 +34,18 @@ func sendMessage(topic, message string, reqPartition int32, producer sarama.Sync
 	return err
 }
 
-func createKafkaProducer(attempts int, sleep time.Duration, createNewProducer func() (sarama.SyncProducer, error)) (sarama.SyncProducer, error) {
+func createKafkaProducer(attempts int, delay time.Duration, createNewProducer func() (sarama.SyncProducer, error)) (sarama.SyncProducer, error) {
 	for i := 0; i < attempts; i++ {
 
 		producer, err = createNewProducer()
 		if err != nil {
 			log.Println("Failed to establish a producer connection, retrying..")
 
-			time.Sleep(sleep)
+			time.Sleep(delay)
 
 			continue
 		}
-		log.Println("Producer connection successfully established")
-
 		return producer, nil
 	}
-	log.Println("Total attempts reached, failed to establish a producer connection")
-
 	return nil, fmt.Errorf("Failed to establish a producer connection")
 }
