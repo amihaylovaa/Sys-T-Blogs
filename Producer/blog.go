@@ -42,9 +42,11 @@ func saveBlog(r *http.Request, producer sarama.SyncProducer) (statusCode int, re
 		return http.StatusBadRequest, "Schema Validation failed"
 	}
 
-	_, _, err = sendMessage("blogs", string(body[:]), 0, producer)
+	err = sendMessage("blogs", string(body[:]), 0, producer)
 
 	if err != nil {
+		log.Println(err)
+
 		return http.StatusInternalServerError, "Cannot save the given blog, please try again later!"
 	}
 
