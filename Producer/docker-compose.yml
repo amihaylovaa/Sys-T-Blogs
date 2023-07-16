@@ -29,7 +29,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
 
   producer_server_client:
-    image: producer_server_client:0.0.6
+    image: producer_server_client:0.0.7
     container_name: producer_server_client
     networks:
       - producer_network

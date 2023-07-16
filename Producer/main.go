@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	producer, error := createKafkaProducer(5, 30*time.Second, createNewProducer)
+	producer, err := createKafkaProducer(5, 30*time.Second, createNewProducer)
 
 	if err != nil {
 		log.Fatalln(err)
