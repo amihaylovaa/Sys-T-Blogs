@@ -2,52 +2,52 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	sch "producer/schema"
 
+	"github.com/Shopify/sarama"
 	"github.com/santhosh-tekuri/jsonschema/v5"
 )
 
-type Blog struct {
-	id             uint
-	title          string
-	subtitle       string
-	content        string
-	attachmentsUrl []string
-	comments       []Comment
-}
-
-func saveBlog(r *http.Request) (statusCode int, responseBody string) {
+func saveBlog(r *http.Request, producer sarama.SyncProducer) (statusCode int, responseBody string) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
-		return http.StatusInternalServerError, "Cannot read request body"
+		return http.StatusBadRequest, "Cannot read request body"
 	}
 
 	var blogDto map[string]interface{}
 
 	if err = json.Unmarshal(body, &blogDto); err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
-		return http.StatusInternalServerError, "Cannot unmarshal request body"
+		return http.StatusBadRequest, "Cannot unmarshal request body"
 	}
 
 	schemaName := sch.BLOG_DTO_SCHEMA
 	sch, err := jsonschema.Compile(schemaName)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return http.StatusInternalServerError, "Cannot load schema"
 	}
 
 	if err = sch.Validate(blogDto); err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return http.StatusBadRequest, "Schema Validation failed"
+	}
+
+	err = sendMessage("blogs", string(body[:]), 0, producer)
+
+	if err != nil {
+		log.Println(err)
+
+		return http.StatusInternalServerError, "Cannot save the given blog, please try again later!"
 	}
 
 	return http.StatusOK, ""
