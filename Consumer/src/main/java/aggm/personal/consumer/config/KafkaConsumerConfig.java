@@ -20,6 +20,7 @@ public class KafkaConsumerConfig {
     @Value("${spring.kafka.bootstrap-server}")
     private String bootstrapServer;
 
+    @Bean
     public Map<String, Object> consumerConfig() {
         Map<String, Object> properties = new HashMap<>();
 
@@ -35,7 +36,8 @@ public class KafkaConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> factory
+    @Bean
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerFactory
             (ConsumerFactory<String, String> consumerFactory) {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 

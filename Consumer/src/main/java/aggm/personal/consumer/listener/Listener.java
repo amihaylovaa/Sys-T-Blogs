@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class Listener {
 
-    @KafkaListener(topics = "comments", groupId = "groupId")
+    @KafkaListener(topicPattern = "comments", groupId = "groupId")
     void commentsListener(String data) {
 
     }
 
-    @KafkaListener(topics = "blogs", groupId = "groupId")
+    @KafkaListener(topicPattern = "blogs", groupId = "groupId")
     void blogsListener(String data) {
 
     }
