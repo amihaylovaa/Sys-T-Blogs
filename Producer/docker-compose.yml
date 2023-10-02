@@ -40,3 +40,12 @@ services:
       - kafka
     ports:
       - "5500:5500"
+
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - 8800:8800
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
