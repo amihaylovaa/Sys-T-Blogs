@@ -25,6 +25,7 @@ func createNewProducer() (sarama.SyncProducer, error) {
 func sendMessage(topic, message string, reqPartition int32, producer sarama.SyncProducer) error {
 	msg := &sarama.ProducerMessage{
 		Topic:     topic,
+		Offset:    0,
 		Partition: reqPartition,
 		Value:     sarama.StringEncoder(message),
 	}
