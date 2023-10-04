@@ -12,11 +12,13 @@ public class Listener {
         topicPartitions = @TopicPartition(topic = "comments",
         partitionOffsets = { @PartitionOffset(partition = "0", initialOffset = "0")}))
     void commentsListener(String data) {
+        // SAVE
     }
 
     @KafkaListener(
             topicPartitions = @TopicPartition(topic = "blogs",
             partitionOffsets = { @PartitionOffset(partition = "0", initialOffset = "0")}))
     void blogsListener(String data) {
+        // SAVE
     }
 }
