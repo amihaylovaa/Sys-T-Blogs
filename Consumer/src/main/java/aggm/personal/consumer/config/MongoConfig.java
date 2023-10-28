@@ -7,8 +7,10 @@ import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
+@EnableMongoRepositories(basePackages = "aggm.personal.consumer.repository")
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Value("${mongo.database.name}")
