@@ -7,12 +7,16 @@
     <groupId>aggm.personal</groupId>
     <artifactId>consumer</artifactId>
     <version>1.0-SNAPSHOT</version>
-    
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.0</version>
     </parent>
+
+    <properties>
+        <lombok.version>1.18.28</lombok.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -47,6 +51,12 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 </project>
