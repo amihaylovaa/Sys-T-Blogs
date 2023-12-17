@@ -4,6 +4,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document("blogs")
@@ -16,5 +17,6 @@ public class Blog {
     private String title;
     private String subtitle;
     private String content;
-    private List<String> attachmentsUrl;
+    private List<String> attachmentsUrl = new ArrayList<>();
+    private List<String> comments = new ArrayList<>();
 }
