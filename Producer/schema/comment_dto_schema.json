@@ -13,6 +13,10 @@
         "description": "The content/body of the comment",
         "type": "string"
       },
+      "user": {
+        "description" : "The user that posts the comments ",
+        "type": "string"
+      },
       "attachmentsUrl": {
           "description": "Comment's URLs to attachments",
           "type": "array",

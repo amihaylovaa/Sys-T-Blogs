@@ -1,4 +1,5 @@
 package aggm.personal.domain;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -7,17 +8,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-@Document("blogs")
+@Document("comments")
 @Getter
 @Setter
-public class Blog {
+public class Comment {
 
     @Id
     private long id;
     private String title;
-    private String subtitle;
     private String content;
+    private String user;
     private List<String> attachmentsUrl = new ArrayList<>();
-    // TODO ?
-    private List<Comment> comments = new ArrayList<>();
 }
