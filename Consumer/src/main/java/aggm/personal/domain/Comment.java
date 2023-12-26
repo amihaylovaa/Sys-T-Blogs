@@ -15,7 +15,7 @@ import java.util.List;
 public class Comment {
 
     @Id
-    private long id;
+    private String id;
     private String title;
     private String content;
     private String user;

@@ -16,7 +16,7 @@ import java.util.List;
 public class Blog {
 
     @Id
-    private long id;
+    private String id;
     private String title;
     private String subtitle;
     private String content;
