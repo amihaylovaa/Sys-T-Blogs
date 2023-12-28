@@ -1,6 +1,6 @@
-package aggm.personal.repository;
+package aggm.personal.consumer.repository;
 
-import aggm.personal.domain.Blog;
+import aggm.personal.consumer.domain.Blog;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

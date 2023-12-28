@@ -1,9 +1,9 @@
-package aggm.personal.service;
+package aggm.personal.consumer.service;
 
 import aggm.personal.consumer.dto.CommentDto;
-import aggm.personal.domain.Blog;
-import aggm.personal.domain.Comment;
-import aggm.personal.repository.BlogRepository;
+import aggm.personal.consumer.domain.Blog;
+import aggm.personal.consumer.domain.Comment;
+import aggm.personal.consumer.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
