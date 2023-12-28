@@ -26,4 +26,8 @@ public class Blog {
 
     @DBRef(lazy = true)
     private List<Comment> comments = new ArrayList<>();
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
 }

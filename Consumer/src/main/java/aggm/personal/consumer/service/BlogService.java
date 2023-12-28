@@ -5,6 +5,7 @@ import aggm.personal.consumer.domain.Blog;
 import aggm.personal.consumer.domain.Comment;
 import aggm.personal.consumer.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,14 +24,17 @@ public class BlogService {
     }
 
     public void saveComment(CommentDto commentDto) {
-        Optional<Blog> blog = blogRepository.findById(commentDto.getBlogId());
+        Optional<Blog> blogOptional = blogRepository.findById(commentDto.getBlogId());
 
-        if (!blog.isPresent()) {
-
+        if (!blogOptional.isPresent()) {
+            // TODO throw exception
         }
         Comment comment = convertCommentDtoToComment(commentDto);
 
-        // TODO - add save
+        Blog blog = blogOptional.get();
+        blog.addComment(comment);
+        // TODO - is it efficient?
+        blogRepository.save(blog);
     }
 
     private Comment convertCommentDtoToComment(CommentDto dto) {
