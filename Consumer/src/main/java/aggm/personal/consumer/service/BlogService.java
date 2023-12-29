@@ -1,11 +1,12 @@
 package aggm.personal.consumer.service;
 
+import aggm.personal.consumer.dto.BlogDto;
 import aggm.personal.consumer.dto.CommentDto;
 import aggm.personal.consumer.domain.Blog;
 import aggm.personal.consumer.domain.Comment;
 import aggm.personal.consumer.repository.BlogRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,8 +18,8 @@ public class BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
-    public void saveBlog(Blog blog) {
-        blog.setPublishingTimestamp(LocalDateTime.now());
+    public void saveBlog(BlogDto blogDto) {
+        Blog blog = convertBlogDtoToBlog(blogDto);
 
         blogRepository.save(blog);
     }
@@ -48,5 +49,19 @@ public class BlogService {
         comment.setAttachmentsUrl(dto.getAttachmentsUrl());
 
         return comment;
+    }
+
+    private Blog convertBlogDtoToBlog(BlogDto dto) {
+        Blog blog = new Blog();
+
+        // TODO - add converter
+        blog.setBlogId(new ObjectId());
+        blog.setContent(dto.getContent());
+        blog.setTitle(dto.getTitle());
+        blog.setSubtitle(dto.getSubtitle());
+        blog.setAttachmentsUrl(dto.getAttachmentsUrl());
+        blog.setPublishingTimestamp(LocalDateTime.now());
+
+        return blog;
     }
 }

@@ -1,6 +1,7 @@
 package aggm.personal.consumer.listener;
 
 import aggm.personal.consumer.domain.Blog;
+import aggm.personal.consumer.dto.BlogDto;
 import aggm.personal.consumer.dto.CommentDto;
 import aggm.personal.consumer.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class Listener {
     @KafkaListener(
             topicPartitions = @TopicPartition(topic = "blogs",
             partitionOffsets = { @PartitionOffset(partition = "0", initialOffset = "0")}))
-    void blogsListener(Blog blog) {
-        blogService.saveBlog(blog);
+    void blogsListener(BlogDto blogDto) {
+        blogService.saveBlog(blogDto);
     }
 }
