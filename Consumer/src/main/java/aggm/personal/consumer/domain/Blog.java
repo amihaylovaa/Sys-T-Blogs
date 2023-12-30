@@ -21,6 +21,7 @@ public class Blog {
     private String title;
     private String subtitle;
     private String content;
+    private String user;
     private LocalDateTime publishingTimestamp;
     private List<String> attachmentsUrl = new ArrayList<>();
 

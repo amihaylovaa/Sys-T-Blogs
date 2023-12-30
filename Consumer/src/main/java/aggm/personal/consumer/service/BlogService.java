@@ -59,6 +59,7 @@ public class BlogService {
         blog.setContent(dto.getContent());
         blog.setTitle(dto.getTitle());
         blog.setSubtitle(dto.getSubtitle());
+        blog.setUser(dto.getUser());
         blog.setAttachmentsUrl(dto.getAttachmentsUrl());
         blog.setPublishingTimestamp(LocalDateTime.now());
 

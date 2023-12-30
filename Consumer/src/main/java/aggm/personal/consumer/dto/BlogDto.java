@@ -11,5 +11,6 @@ public class BlogDto {
     private String title;
     private String subtitle;
     private String content;
+    private String user;
     private List<String> attachmentsUrl = new ArrayList<>();
 }
