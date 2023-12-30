@@ -4,6 +4,7 @@ import aggm.personal.consumer.dto.BlogDto;
 import aggm.personal.consumer.dto.CommentDto;
 import aggm.personal.consumer.domain.Blog;
 import aggm.personal.consumer.domain.Comment;
+import aggm.personal.consumer.exception.DocumentNotFoundException;
 import aggm.personal.consumer.repository.BlogRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class BlogService {
         Optional<Blog> blogOptional = blogRepository.findById(commentDto.getBlogId());
 
         if (!blogOptional.isPresent()) {
-            // TODO throw exception
+            throw new DocumentNotFoundException();
         }
         Comment comment = convertCommentDtoToComment(commentDto);
 
