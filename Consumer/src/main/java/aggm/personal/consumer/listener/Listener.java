@@ -1,6 +1,5 @@
 package aggm.personal.consumer.listener;
 
-import aggm.personal.consumer.domain.Blog;
 import aggm.personal.consumer.dto.BlogDto;
 import aggm.personal.consumer.dto.CommentDto;
 import aggm.personal.consumer.service.BlogService;
