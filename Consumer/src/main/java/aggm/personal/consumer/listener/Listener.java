@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.PartitionOffset;
 import org.springframework.kafka.annotation.TopicPartition;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,15 +18,17 @@ public class Listener {
 
 @KafkaListener(
         topicPartitions = @TopicPartition(topic = "comments",
-        partitionOffsets = { @PartitionOffset(partition = "0", initialOffset = "0")}))
+        partitionOffsets = { @PartitionOffset(partition = "0", initialOffset = "0")}),
+        containerFactory = "kafkaListenerContainerFactoryComment")
     void commentsListener(CommentDto commentDto) {
         blogService.saveComment(commentDto);
     }
 
+    // TODO payload?
     @KafkaListener(
             topicPartitions = @TopicPartition(topic = "blogs",
             partitionOffsets = { @PartitionOffset(partition = "0", initialOffset = "0")}))
-    void blogsListener(BlogDto blogDto) {
+    void blogsListener(@Payload BlogDto blogDto) {
         blogService.saveBlog(blogDto);
     }
 }
