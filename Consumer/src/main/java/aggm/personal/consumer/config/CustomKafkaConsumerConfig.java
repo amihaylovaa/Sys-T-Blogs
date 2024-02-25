@@ -1,7 +1,7 @@
 package aggm.personal.consumer.config;
 
-import aggm.personal.consumer.domain.Blog;
-import aggm.personal.consumer.domain.Comment;
+import aggm.personal.consumer.dto.BlogDto;
+import aggm.personal.consumer.dto.CommentDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,14 +38,14 @@ public class CustomKafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, Blog> blogConsumerFactory() {
+    public ConsumerFactory<String, BlogDto> blogConsumerFactory() {
         return new DefaultKafkaConsumerFactory<>(blogConsumerConfig(), new StringDeserializer(),
-                new JsonDeserializer<>(Blog.class));
+                new JsonDeserializer<>(BlogDto.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Blog> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Blog> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, BlogDto> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, BlogDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
 
         factory.setConsumerFactory(blogConsumerFactory());
 
@@ -65,14 +65,14 @@ public class CustomKafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, Comment> commentConsumerFactory() {
+    public ConsumerFactory<String, CommentDto> commentConsumerFactory() {
         return new DefaultKafkaConsumerFactory<>(commentConsumerConfig(), new StringDeserializer(),
-                new JsonDeserializer<>(Comment.class));
+                new JsonDeserializer<>(CommentDto.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Comment> kafkaListenerContainerFactoryComment() {
-        ConcurrentKafkaListenerContainerFactory<String, Comment> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, CommentDto> kafkaListenerContainerFactoryComment() {
+        ConcurrentKafkaListenerContainerFactory<String, CommentDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
 
         factory.setConsumerFactory(commentConsumerFactory());
 

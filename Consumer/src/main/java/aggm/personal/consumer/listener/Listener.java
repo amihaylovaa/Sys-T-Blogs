@@ -24,11 +24,10 @@ public class Listener {
         blogService.saveComment(commentDto);
     }
 
-    // TODO payload?
     @KafkaListener(
             topicPartitions = @TopicPartition(topic = "blogs",
             partitionOffsets = { @PartitionOffset(partition = "0", initialOffset = "0")}))
-    void blogsListener(@Payload BlogDto blogDto) {
+    void blogsListener(BlogDto blogDto) {
         blogService.saveBlog(blogDto);
     }
 }
