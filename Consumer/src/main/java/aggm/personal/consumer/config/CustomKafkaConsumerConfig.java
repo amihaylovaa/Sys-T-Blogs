@@ -38,15 +38,15 @@ public class CustomKafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, String> kafkaListenerContainerFactory() {
+    public ConsumerFactory<String, String> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 
-        factory.setConsumerFactory(kafkaListenerContainerFactory());
+        factory.setConsumerFactory(consumerFactory());
 
         return factory;
     }
