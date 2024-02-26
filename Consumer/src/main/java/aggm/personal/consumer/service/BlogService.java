@@ -7,6 +7,7 @@ import aggm.personal.consumer.domain.Blog;
 import aggm.personal.consumer.domain.Comment;
 import aggm.personal.consumer.exception.DocumentNotFoundException;
 import aggm.personal.consumer.repository.BlogRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,8 @@ public class BlogService {
     }
 
     public void saveComment(CommentDto commentDto) {
-        Optional<Blog> blogOptional = blogRepository.findById(commentDto.getBlogId());
+        ObjectId blogId = new ObjectId(commentDto.getBlogId());
+        Optional<Blog> blogOptional = blogRepository.findById(blogId);
 
         if (!blogOptional.isPresent()) {
             throw new DocumentNotFoundException();
