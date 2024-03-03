@@ -1,6 +1,5 @@
 package aggm.personal.consumer.service;
 
-import aggm.personal.consumer.converter.Converter;
 import aggm.personal.consumer.dto.BlogDto;
 import aggm.personal.consumer.dto.CommentDto;
 import aggm.personal.consumer.domain.Blog;
@@ -19,8 +18,11 @@ public class BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
+    @Autowired
+    private ConversionService conversionService;
+
     public void saveBlog(BlogDto blogDto) {
-        Blog blog = Converter.convertBlogDtoToBlog(blogDto);
+        Blog blog = conversionService.convert(blogDto, Blog.class);
 
         blogRepository.save(blog);
     }
@@ -32,7 +34,7 @@ public class BlogService {
         if (!blogOptional.isPresent()) {
             throw new DocumentNotFoundException();
         }
-        Comment comment = Converter.convertCommentDtoToComment(commentDto);
+        Comment comment = conversionService.convert(commentDto, Comment.class);
 
         Blog blog = blogOptional.get();
         blog.addComment(comment);
