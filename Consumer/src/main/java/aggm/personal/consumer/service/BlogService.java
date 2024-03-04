@@ -19,10 +19,10 @@ public class BlogService {
     private BlogRepository blogRepository;
 
     @Autowired
-    private ConversionService conversionService;
+    private ApplicationConversionService applicationConversionService;
 
     public void saveBlog(BlogDto blogDto) {
-        Blog blog = conversionService.convert(blogDto, Blog.class);
+        Blog blog = applicationConversionService.convert(blogDto, Blog.class);
 
         blogRepository.save(blog);
     }
@@ -34,7 +34,7 @@ public class BlogService {
         if (!blogOptional.isPresent()) {
             throw new DocumentNotFoundException();
         }
-        Comment comment = conversionService.convert(commentDto, Comment.class);
+        Comment comment = applicationConversionService.convert(commentDto, Comment.class);
 
         Blog blog = blogOptional.get();
         blog.addComment(comment);

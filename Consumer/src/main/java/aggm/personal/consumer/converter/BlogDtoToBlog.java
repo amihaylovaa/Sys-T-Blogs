@@ -4,9 +4,11 @@ import aggm.personal.consumer.domain.Blog;
 import aggm.personal.consumer.dto.BlogDto;
 import org.bson.types.ObjectId;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Component
 public class BlogDtoToBlog implements Converter<BlogDto, Blog> {
 
     @Override
