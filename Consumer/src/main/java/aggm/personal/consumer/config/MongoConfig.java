@@ -13,11 +13,11 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = "aggm.personal.consumer.repository")
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
-    @Value("${mongo.database.name}")
+    @Value("${spring.data.mongodb.database}")
     private String databaseName;
 
-    @Value("${mongo.database.connection.url}")
-    private String connectionUrl;
+    @Value("${spring.data.mongodb.uri}")
+    private String connectionUri;
 
     @Override
     protected String getDatabaseName() {
@@ -26,7 +26,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Override
     public MongoClient mongoClient() {
-        ConnectionString connectionString = new ConnectionString(connectionUrl);
+        ConnectionString connectionString = new ConnectionString(connectionUri);
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .build();
