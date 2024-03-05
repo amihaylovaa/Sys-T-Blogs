@@ -1,7 +1,7 @@
 package main
 
 type CommentDto struct {
-	BlogId         uint     `json: "blogId"`
+	BlogId         string   `json: "blogId"`
 	Content        string   `json: "content"`
 	User           string   `json: "user"`
 	AttachmentsUrl []string `json: "attachmentsUrl"`

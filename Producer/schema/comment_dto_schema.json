@@ -6,7 +6,7 @@
     "properties": {
       "blogId": {
         "description": "The ID of the blog to which the comment belongs",
-        "type": "number",
+        "type": "string",
         "exclusiveMinimum": 0
       },
       "content": {
