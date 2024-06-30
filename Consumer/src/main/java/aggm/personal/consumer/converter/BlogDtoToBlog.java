@@ -15,7 +15,7 @@ public class BlogDtoToBlog implements Converter<BlogDto, Blog> {
     public Blog convert(BlogDto dto) {
         Blog blog = new Blog();
 
-        blog.setBlogId(new ObjectId());
+        blog.setId(new ObjectId());
         blog.setContent(dto.getContent());
         blog.setTitle(dto.getTitle());
         blog.setSubtitle(dto.getSubtitle());

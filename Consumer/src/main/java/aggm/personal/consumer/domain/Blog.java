@@ -17,7 +17,7 @@ public class Blog {
 
     @Id
     @Field("blog_id")
-    private ObjectId blogId;
+    private ObjectId id;
     private String title;
     private String subtitle;
     private String content;
