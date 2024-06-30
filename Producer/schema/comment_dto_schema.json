@@ -6,11 +6,15 @@
     "properties": {
       "blogId": {
         "description": "The ID of the blog to which the comment belongs",
-        "type": "number",
+        "type": "string",
         "exclusiveMinimum": 0
       },
       "content": {
         "description": "The content/body of the comment",
+        "type": "string"
+      },
+      "user": {
+        "description" : "The user that posts the comments ",
         "type": "string"
       },
       "attachmentsUrl": {

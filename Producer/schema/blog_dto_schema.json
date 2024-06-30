@@ -16,6 +16,10 @@
       "description": "The content/body of the blog",
       "type": "string"
     },
+    "user": {
+      "description" : "The user that publish the blog ",
+      "type": "string"
+    },
     "attachmentsUrl": {
         "description": "Blog's URLs to attachments",
         "type": "array",
