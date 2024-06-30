@@ -31,7 +31,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
 
   producer_server_client:
-    image: producer_server_client:0.0.8
+    image: producer_server_client:0.0.11
     container_name: producer_server_client
     networks:
       - producer_network
@@ -40,3 +40,9 @@ services:
       - kafka
     ports:
       - "5500:5500"
+
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - 8800:27017
